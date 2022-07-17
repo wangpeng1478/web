@@ -32,9 +32,14 @@
                 opacity: 0 !important;
             }
             video{
+                display: block;
                 width: 100vw;
                 height: 100vh;
                 background: #000;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
             }
             .Camera-toggle{
                 position: fixed;
@@ -70,6 +75,10 @@
                 width: 60vw;
                 aspect-ratio: 1/1;
                 overflow: hidden;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
             }
             .Camera-overlay:before {
                 content: "";
@@ -269,6 +278,7 @@
                                 video.src = window.URL && window.URL.createObjectURL(stream) || stream
                             }
                             video.play();
+                            alert(`offsetWidth:${video.offsetWidth}\noffsetHeight:${video.offsetHeight}`);
                             video.addEventListener('play', () => {
                                 toast.clear();
                                 this.loading = false;
@@ -302,6 +312,7 @@
                     //获取设备信息
                     devicesInit(){
                         navigator.mediaDevices.enumerateDevices().then(devicesList => {
+                            alert(JSON.stringify(devicesList));
                             const arr = [];
                             devicesList.forEach(e => {
                                 if (e.deviceId && e.kind === 'videoinput') {
