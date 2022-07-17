@@ -253,7 +253,7 @@
                             video: true,
                             video: {
                                 deviceId,
-                                // facingMode: "environment",
+                                facingMode: "environment",
                                 width:this.width,
                                 height:this.height,
                                 frameRate: { ideal: 100, max: 150 } //最佳帧率
@@ -278,7 +278,6 @@
                                 video.src = window.URL && window.URL.createObjectURL(stream) || stream
                             }
                             video.play();
-                            alert(`offsetWidth:${video.offsetWidth}\noffsetHeight:${video.offsetHeight}`);
                             video.addEventListener('play', () => {
                                 toast.clear();
                                 this.loading = false;
@@ -312,7 +311,6 @@
                     //获取设备信息
                     devicesInit(){
                         navigator.mediaDevices.enumerateDevices().then(devicesList => {
-                            alert(JSON.stringify(devicesList));
                             const arr = [];
                             devicesList.forEach(e => {
                                 if (e.deviceId && e.kind === 'videoinput') {
