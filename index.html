@@ -1,0 +1,706 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CSS3动画在线制作-在线工具</title>
+    <meta name="keywords" content="CSS3动画在线制作" />
+    <meta name="description" content="CSS3动画在线制作" />
+    <link rel="mask-icon" href="https://github.githubassets.com/pinned-octocat.svg" color="#000000">
+    <link rel="alternate icon" class="js-site-favicon" type="image/png" href="https://github.githubassets.com/favicons/favicon.png">
+    <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+    <link href="animation/1459055129.css" rel="stylesheet" media="screen" />
+    <link href="animation/1459055158.css" rel="stylesheet" media="screen" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    </script>
+    <!--[if lte IE 8]>
+        <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <header class="mod_header">
+        <div class="inner" onclick="window.location.href='view-source:'+window.location.href">
+            <h1>
+                <span>CSS3
+					</span>Animation
+                <i class="ico_logo">
+					</i>
+            </h1>
+            <ul class="mod_nav"></ul>
+        </div>
+    </header>
+    <section class="wrap">
+        <aside class="mod_side">
+            <div class="mod_tab" id="tab_nav">
+                <ul>
+                    <li class="current">变形 & 过渡
+                    </li>
+                    <li>自定义动画
+                    </li>
+                    <li>动画库
+                    </li>
+                </ul>
+            </div>
+            <div class="mod_tab_content">
+                <div class="item" style="display:block;">
+                    <div class="mod_ope">
+                        <span class="button" id="view_transform">动画预览
+							</span>
+                        <span class="button" id="reset_transfrom">重置
+							</span>
+                    </div>
+                    <div class="mod_d">
+                        <p>显示方式：
+                            <span id="2d" class="icon_radio checked">
+								</span>2D
+                            <span id="3d" class="icon_radio m_3d">
+								</span>3D
+                        </p>
+                    </div>
+                    <ul class="item_transform">
+                        <li class="mode_3d">
+                            <div class="mod_fn">
+                                <label for="perspective" title="3d深度">透视:
+									</label>
+                                <input type="text" id="perspective" class="mod_input" />px
+                            </div>
+                            <div class="scroll_box">
+                                <div class="scroll_bar" fn="perspective" units="px" maxVal="1000" minVal="0">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mode_2d">
+                            <div class="mod_fn">
+                                <label for="rotate" title="rotate函数能够旋转元素，它主要是在二维空间内进行操作，通过一个角度参数值，来设定旋转的幅度。单位为一个角度值，单位deg，可以为正数或者负数，正数是顺时针旋转，负数是逆时针旋转。">旋转:
+									</label>
+                                <input type="text" id="rotate" class="mod_input" />deg
+                            </div>
+                            <div class="scroll_box">
+                                <div class="scroll_bar" fn="rotate" units="deg" maxVal="360" minVal="-360">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mode_3d">
+                            <div class="mod_fn">
+                                <label for="rotateX" title="rotate函数的子集，配合perspective函数可以实现3维空间内的旋转">X轴旋转:
+									</label>
+                                <input type="text" id="rotateX" class="mod_input" />deg
+                            </div>
+                            <div class="scroll_box">
+                                <div class="scroll_bar" fn="rotateX" units="deg" maxVal="360" minVal="-360">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mode_3d">
+                            <div class="mod_fn">
+                                <label for="rotateY" title="rotate函数的子集，配合perspective函数可以实现3维空间内的旋转">Y轴旋转:
+									</label>
+                                <input type="text" id="rotateY" class="mod_input" />deg
+                            </div>
+                            <div class="scroll_box">
+                                <div class="scroll_bar" fn="rotateY" units="deg" maxVal="360" minVal="-360">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mode_3d">
+                            <div class="mod_fn">
+                                <label for="rotateZ" title="rotate函数的子集，配合perspective函数可以实现3维空间内的旋转">Z轴旋转:
+									</label>
+                                <input type="text" id="rotateZ" class="mod_input" />deg
+                            </div>
+                            <div class="scroll_box">
+                                <div class="scroll_bar" fn="rotateZ" units="deg" maxVal="360" minVal="-360">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mod_fn">
+                                <label for="scaleX" title="scaleX函数可以对元素在X轴方向进行缩放，数值可以是正数和负数，负数是先翻转元素然后再缩放。">X轴缩放:
+									</label>
+                                <input type="text" id="scaleX" class="mod_input" />倍
+                            </div>
+                            <div class="scroll_box">
+                                <div class="scroll_bar" fn="scaleX" units="" maxVal="5" minVal="-5">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mod_fn">
+                                <label for="scaleY" title="scaleY函数可以对元素在Y轴方向进行缩放，数值可以是正数和负数，负数是先翻转元素然后再缩放。 ">Y轴缩放:
+									</label>
+                                <input type="text" id="scaleY" class="mod_input" />倍
+                            </div>
+                            <div class="scroll_box">
+                                <div class="scroll_bar" fn="scaleY" units="" maxVal="5" minVal="-5">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mode_3d">
+                            <div class="mod_fn">
+                                <label for="scaleZ" title="scaleZ函数配合perspective函数可以实现对元素Z轴方向进行缩放">Z轴缩放:
+									</label>
+                                <input type="text" id="scaleZ" class="mod_input" />倍
+                            </div>
+                            <div class="scroll_box">
+                                <div class="scroll_bar" fn="scaleZ" units="" maxVal="5" minVal="-5">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mod_fn">
+                                <label for="translateX" title="translateX函数可以控制元素在X方向上的移动，如果参数是负数，则表示往相反的方向移动">X轴位移:
+									</label>
+                                <input type="text" id="translateX" class="mod_input" />px
+                            </div>
+                            <div class="scroll_box">
+                                <div class="scroll_bar" fn="translateX" units="px" maxVal="1000" minVal="-1000">
+                                </div>
+                            </div>
+                            <li>
+                                <div class="mod_fn">
+                                    <label for="translateY" title="translateY函数可以控制元素在Y方向上的移动，如果参数是负数，则表示往相反的方向移动">Y轴位移:
+									</label>
+                                    <input type="text" id="translateY" class="mod_input" />px
+                                </div>
+                                <div class="scroll_box">
+                                    <div class="scroll_bar" fn="translateY" units="px" maxVal="1000" minVal="-1000">
+                                    </div>
+                                </div>
+                                <li class="mode_3d">
+                                    <div class="mod_fn">
+                                        <label for="translateZ" title="translateZ函数配合perspective函数可以实现对元素Z轴方向进行位移">Z轴位移:
+									</label>
+                                        <input type="text" id="translateZ" class="mod_input" />px
+                                    </div>
+                                    <div class="scroll_box">
+                                        <div class="scroll_bar" fn="translateZ" units="px" maxVal="1000" minVal="-1000">
+                                        </div>
+                                    </div>
+                                    <li>
+                                        <div class="mod_fn">
+                                            <label for="skewX" title="skewX函数可以在X轴方向对元素进行倾斜，参数为负表示向相反方向倾斜。">X轴倾斜:
+									</label>
+                                            <input type="text" id="skewX" class="mod_input" />deg
+                                        </div>
+                                        <div class="scroll_box">
+                                            <div class="scroll_bar" fn="skewX" units="deg" maxVal="180" minVal="-180">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="mod_fn">
+                                            <label for="skewY" title="skewY函数可以在Y轴方向对元素进行倾斜，参数为负表示向相反方向倾斜。">Y轴倾斜:
+									</label>
+                                            <input type="text" id="skewY" class="mod_input" />deg
+                                        </div>
+                                        <div class="scroll_box">
+                                            <div class="scroll_bar" fn="skewY" units="deg" maxVal="180" minVal="-180">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mode_2d">
+                                        <div class="mod_matrix_box">
+                                            <div class="mod_fn_2">矩阵变形-matrix(a,c,e,b,d,f)c,e值用正弦或余弦值表示
+                                            </div>
+                                            <div class="mod_matrix" id="matrix">
+                                                <ul>
+                                                    <li>
+                                                        <span>参数a:
+												</span>
+                                                        <input type="text" class="matrix mod_input" value="1" title="X轴缩放scaleX" />
+                                                    </li>
+                                                    <li>
+                                                        <span>参数c:
+												</span>
+                                                        <input type="text" class="matrix mod_input" value="0" title="Y轴倾斜skewY" />
+                                                    </li>
+                                                    <li>
+                                                        <span>参数e:
+												</span>
+                                                        <input type="text" class="matrix mod_input" value="0" title="X轴倾斜skewX" />
+                                                    </li>
+                                                    <li>
+                                                        <span>参数b:
+												</span>
+                                                        <input type="text" class="matrix mod_input" value="1" title="Y轴缩放scaleY" />
+                                                    </li>
+                                                    <li>
+                                                        <span>参数d:
+												</span>
+                                                        <input type="text" class="matrix mod_input" value="0" title="X轴位移translateX" />
+                                                    </li>
+                                                    <li>
+                                                        <span>参数f:
+												</span>
+                                                        <input type="text" class="matrix mod_input" value="0" title="Y轴位移translateY" />
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="mod_fn_3">
+                                            <label for="transform-origin-1" class="fn">变形原点:
+									</label>
+                                            <input type="text" id="transform-origin-1" value="50%" class="mod_input" style="width:60px;">
+                                            <input type="text" id="transform-origin-2" value="50%" class="mod_input" style="width:60px;" />
+                                        </div>
+                                    </li>
+                    </ul>
+                    <!--过渡-->
+                    <ul class="transition_box">
+                        <li>
+                            <label for="transition-property">过渡属性:
+								</label>
+                            <input type="text" id="transition-property" class="mod_input" value="all" disabled />
+                        </li>
+                        <li>
+                            <label for="transition-duration">过渡时间:
+								</label>
+                            <input type="text" id="transition-duration" class="mod_input" value="0.5">s
+                        </li>
+                        <li>
+                            <label for="transition-delay">延迟时间:
+								</label>
+                            <input type="text" id="transition-delay" class="mod_input" value="0">s
+                        </li>
+                        <li class="last">
+                            <div class="mod_ease">过渡效果:
+                            </div>
+                            <div class="ease_list" id="mod_tran_ease">
+                                <span value="ease" class="button checked">ease
+									</span>
+                                <span value="linear" class="button">linear
+									</span>
+                                <span value="ease-in" class="button">ease-in
+									</span>
+                                <span value="ease-out" class="button">ease-out
+									</span>
+                                <span value="ease-in-out" class="button">ease-in-out
+									</span>
+                                <span value="cubic-bezier(0.25,0.1,0.25,1.0)" class="button" id="cubic_2">cubic-bezier(0.5,0.25,0.5,0.75)
+									</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <div class="mod_ope">
+                        <span class="button" id="view_animation">动画预览
+							</span>
+                        <span class="button" id="see_code">查看代码
+							</span>
+                        <span class="button" id="reset_animation">重置
+							</span>
+                    </div>
+                    <ul class="animation_box">
+                        <li>
+                            <label for="animation-name" class="fn" title="animation-name">动画名称:
+								</label>
+                            <input type="text" name="animation-name" id="animation-name" value="demo">
+                        </li>
+                        <li>
+                            <label for="animation-duration" class="fn" title="animation-duration">执行时间:
+								</label>
+                            <input type="text" name="animation-duration" id="animation-duration" value="0.5">
+                            <span class="intro">s
+								</span>
+                        </li>
+                        <li>
+                            <label for="animation-delay" class="fn" title="animation-delay">延迟执行:
+								</label>
+                            <input type="text" name="animation-delay" id="animation-delay" value="0">
+                            <span class="intro">s
+								</span>
+                        </li>
+                        <li>
+                            <label for="animation-iteration-count" class="fn" title="animation-iteration-count">执行次数:
+								</label>
+                            <input type="text" name="animation-iteration-count" id="animation-iteration-count" value="1">
+                            <span class="intro">[infinite]无限循环
+								</span>
+                        </li>
+                        <li>
+                            <label for="transform-origin-x" class="fn" title="transform-origin">变形原点:
+								</label>
+                            <input type="text" id="transform-origin-x" value="center" size="8">
+                            <input type="text" id="transform-origin-y" value="center" size="8">
+                        </li>
+                        <li>
+                            <div class="mod_ease" title="animation-timing-function">过渡效果:
+                            </div>
+                            <div class="ease_list" id="mod_ani_ease">
+                                <span value="ease" class="button checked">ease
+									</span>
+                                <span value="ease-in" class="button">ease-in
+									</span>
+                                <span value="ease-out" class="button">ease-out
+									</span>
+                                <span value="ease-in-out" class="button" id="cublic">ease-in-out
+									</span>
+                                <span value="linear" class="button">linear
+									</span>
+                                <span value="cubic-bezier(0.25,0.1,0.25,1.0)" class="button" id="cubic">cubic-bezier(0.5,0.25,0.5,0.75)
+									</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mod_ease" title="animation-direction">播放方向:
+                            </div>
+                            <div class="ease_list" id="mod_ani_pos">
+                                <span value="normal" class="button checked">normal
+									</span>
+                                <span value="alternate" class="button">alternate
+									</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mod_ease" title="backface-visibility">隐藏背景:
+                            </div>
+                            <div class="ease_list" id="mod_ani_backface">
+                                <span value="visible" class="button checked">visible
+									</span>
+                                <span value="hidden" class="button">hidden
+									</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mod_ease">完成状态:
+                            </div>
+                            <div class="ease_list" id="mod_fill_mode">
+                                <span value="none" class="button checked">none
+									</span>
+                                <span value="forwards" class="button">forwards
+									</span>
+                                <span value="backwards" class="button">backwards
+									</span>
+                                <span value="both" class="button">both
+									</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mod_ease">动画状态:
+                            </div>
+                            <div class="ease_list" id="mod_play_state">
+                                <span value="none" class="button checked">none
+									</span>
+                                <span value="running" class="button">running
+									</span>
+                                <span value="paused" class="button">paused
+									</span>
+                            </div>
+                        </li>
+                        <li class="last">
+                            <div class="mod_ease_2">执行动画的属性:
+                            </div>
+                            <div class="ease_list" id="mod_play_ani_pre">
+                                <span value="width" units="px" class="button_pre">width
+									</span>
+                                <span value="height" units="px" class="button_pre">height
+									</span>
+                                <span value="top" units="px" class="button_pre">top
+									</span>
+                                <span value="left" units="px" class="button_pre">left
+									</span>
+                                <span value="background" units="" class="button_pre">background
+									</span>
+                                <span value="border-radius" units="px" class="button_pre">border-radius
+									</span>
+                                <span value="rotate" units="deg" class="button_pre">rotate
+									</span>
+                                <span value="rotateX" units="deg" class="button_pre" title="3D，X轴旋转">rotateX
+									</span>
+                                <span value="rotateY" units="deg" class="button_pre" title="3D，Y轴旋转">rotateY
+									</span>
+                                <span value="rotateZ" units="deg" class="button_pre" title="3D，Z轴旋转">rotateZ
+									</span>
+                                <span value="scaleX" units="" class="button_pre" title="X轴缩放">scaleX
+									</span>
+                                <span value="scaleY" units="" class="button_pre" title="Y轴缩放">scaleY
+									</span>
+                                <span value="translateX" units="px" class="button_pre" title="X轴位移">translateX
+									</span>
+                                <span value="translateY" units="px" class="button_pre" title="Y轴位移">translateY
+									</span>
+                                <span value="translateZ" units="px" class="button_pre" title="3D，Z轴位移，需设置perspective属性">translateZ
+									</span>
+                                <span value="skewX" units="deg" class="button_pre" title="X轴倾斜">skewX
+									</span>
+                                <span value="skewY" units="deg" class="button_pre" title="Y轴倾斜">skewY
+									</span>
+                                <span value="perspective" units="px" class="button_pre" title="如果要进行3D变形动画，这个值一定要最先添加">perspective
+									</span>
+                                <span value="opacity" units="" class="button_pre">opacity
+									</span>
+                            </div>
+                            <div class="add_pro">属性：
+                                <input type="text" id="pro" size="15" /> 单位：
+                                <input type="text" id="pro_unit" size="10" />
+                                <span class="button" id="add_pro">添加
+									</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <div class="mod_ope">
+                        <span class="button" id="see_demo_css">查看代码
+							</span>
+                    </div>
+                    <div class="btn_box">
+                        <h3>基本效果
+                        </h3>
+                        <div class="butt_list">
+                            <a class="butt" data-test='flash'>闪光灯
+								</a>
+                            <a class="butt" data-test='bounce'>弹起
+								</a>
+                            <a class="butt" data-test='shake'>摇摆
+								</a>
+                            <a class="butt" data-test='tada'>秋千
+								</a>
+                            <a class="butt" data-test='swing'>swing
+								</a>
+                            <a class="butt" data-test='wobble'>疯狂摆动
+								</a>
+                            <!--<a class="butt" data-test='wiggle'>摆动</a>-->
+                            <a class="butt" data-test='pulse'>脉冲
+								</a>
+                        </div>
+                        <h3>翻转
+                        </h3>
+                        <div class="butt_list">
+                            <a class="butt" data-test='flip'>翻转
+								</a>
+                            <a class="butt" data-test='flipInX'>X轴淡入
+								</a>
+                            <a class="butt" data-test='flipOutX'>X轴淡出
+								</a>
+                            <a class="butt" data-test='flipInY'>Y轴淡入
+								</a>
+                            <a class="butt" data-test='flipOutY'>Y轴淡出
+								</a>
+                        </div>
+                        <h3>淡入效果
+                        </h3>
+                        <div class="butt_list">
+                            <a class="butt" data-test='fadeIn'>淡入
+								</a>
+                            <a class="butt" data-test='fadeInUp'>下方淡入
+								</a>
+                            <a class="butt" data-test='fadeInDown'>上方淡入
+								</a>
+                            <a class="butt" data-test='fadeInLeft'>左边淡入
+								</a>
+                            <a class="butt" data-test='fadeInRight'>右边淡入
+								</a>
+                            <a class="butt" data-test='fadeInUpBig'>底部淡入
+								</a>
+                            <a class="butt" data-test='fadeInDownBig'>顶部淡入
+								</a>
+                            <a class="butt" data-test='fadeInLeftBig'>页面左边淡入
+								</a>
+                            <a class="butt" data-test='fadeInRightBig'>页面右边淡入
+								</a>
+                        </div>
+                        <h3>淡出效果
+                        </h3>
+                        <div class="butt_list">
+                            <a class="butt" data-test='fadeOut'>淡出
+								</a>
+                            <a class="butt" data-test='fadeOutUp'>向上淡出
+								</a>
+                            <a class="butt" data-test='fadeOutDown'>向下淡出
+								</a>
+                            <a class="butt" data-test='fadeOutLeft'>向左淡出
+								</a>
+                            <a class="butt" data-test='fadeOutRight'>向右淡出
+								</a>
+                            <a class="butt" data-test='fadeOutUpBig'>顶部淡出
+								</a>
+                            <a class="butt" data-test='fadeOutDownBig'>底部淡出
+								</a>
+                            <a class="butt" data-test='fadeOutLeftBig'>页面左边淡出
+								</a>
+                            <a class="butt" data-test='fadeOutRightBig'>页面右边淡出
+								</a>
+                        </div>
+                        <h3>弹跳进入效果
+                        </h3>
+                        <div class="butt_list">
+                            <a class="butt" data-test='bounceIn'>bounceIn
+								</a>
+                            <a class="butt" data-test='bounceInDown'>bounceInDown
+								</a>
+                            <a class="butt" data-test='bounceInUp'>bounceInUp
+								</a>
+                            <a class="butt" data-test='bounceInLeft'>bounceInLeft
+								</a>
+                            <a class="butt" data-test='bounceInRight'>bounceInRight
+								</a>
+                        </div>
+                        <h3>弹跳退出效果
+                        </h3>
+                        <div class="butt_list">
+                            <a class="butt" data-test='bounceOut'>bounceOut
+								</a>
+                            <a class="butt" data-test='bounceOutDown'>bounceOutDown
+								</a>
+                            <a class="butt" data-test='bounceOutUp'>bounceOutUp
+								</a>
+                            <a class="butt" data-test='bounceOutLeft'>bounceOutLeft
+								</a>
+                            <a class="butt" data-test='bounceOutRight'>bounceOutRight
+								</a>
+                        </div>
+                        <h3>旋转进入效果
+                        </h3>
+                        <div class="butt_list">
+                            <a class="butt" data-test='rotateIn'>rotateIn
+								</a>
+                            <a class="butt" data-test='rotateInDownLeft'>rotateInDownLeft
+								</a>
+                            <a class="butt" data-test='rotateInDownRight'>rotateInDownRight
+								</a>
+                            <a class="butt" data-test='rotateInUpLeft'>rotateInUpLeft
+								</a>
+                            <a class="butt" data-test='rotateInUpRight'>rotateInUpRight
+								</a>
+                        </div>
+                        <h3>旋转退出效果
+                        </h3>
+                        <div class="butt_list">
+                            <a class="butt" data-test='rotateOut'>rotateOut
+								</a>
+                            <a class="butt" data-test='rotateOutDownLeft'>rotateOutDownLeft
+								</a>
+                            <a class="butt" data-test='rotateOutDownRight'>rotateOutDownRight
+								</a>
+                            <a class="butt" data-test='rotateOutUpLeft'>rotateOutUpLeft
+								</a>
+                            <a class="butt" data-test='rotateOutUpRight'>rotateOutUpRight
+								</a>
+                        </div>
+                        <!--<h3>Lightspeed</h3>
+<div class="butt_list"><a class="butt" data-test='lightSpeedIn'>lightSpeedIn</a><a class="butt" data-test='lightSpeedOut'>lightSpeedOut</a></div>-->
+                        <h3>特效
+                        </h3>
+                        <div class="butt_list">
+                            <a class="butt" data-test='hinge'>hinge
+								</a>
+                            <a class="butt" data-test='rollIn'>rollIn
+								</a>
+                            <a class="butt" data-test='rollOut'>rollOut
+								</a>
+                        </div>
+                        <p class="url">以上实例来源于：
+                            <a href="http://daneden.me/animate/" target="_blank" rel="nofollow">http://daneden.me/animate/
+								</a>
+                        </p>
+                    </div>
+                </div>
+                <!--变形代码显示区域-->
+                <div class="show_code hidden" id="show_code">
+                </div>
+            </div>
+        </aside>
+        <div class="canvas">
+            <div id="animation" class="animation">
+                <div class="origin" id="origin" title="拖动这里改变变形原点">
+                </div>
+            </div>
+            <span class="tis">您可以拖动自己的图片到这个区域
+				</span>
+        </div>
+        <div class="ani hidden" id="ani">
+            <ul id="ani_pro">
+            </ul>
+            <div id="time_line">
+            </div>
+        </div>
+        <!--<div class="show_code hidden" id="show_demo_code"></div>-->
+        <!--<div id="" class="gui_success hidden">复制代码成功!</div>-->
+        <div class="zon">
+        </div>
+    </section>
+    <div class="mod_cubic_dialog">
+        <div class="hd">
+            <h2>贝塞尔曲线工具
+            </h2>
+            <a href="#" id="colse_cubic">关闭
+				</a>
+        </div>
+        <div class="inner">
+            <figure>
+                <canvas id="curve" width="200" height="450">
+					</canvas>
+            </figure>
+            <select name="presets" id="presets" style="display:none;">
+					<option value="0.5, 0.25, 0.5, 0.75" selected="selected">custom
+					</option>
+				</select>
+        </div>
+    </div>
+    <!--动画代码显示区域-->
+    <div class="pop_mask" id="mask" style="display:none;">
+    </div>
+    <div id="pop2" class="pop_dialog downs" style="display:none;margin:-150px 0 0 -360px;width:720px;">
+        <div class="hd">
+            <a href="#" class="pop_close" id="close_chrome" title="关闭">X
+				</a>
+        </div>
+        <div class="inner">
+            <!--大浮层-->
+            <div class="down">
+                <a href="http://www.google.com/chrome/" target="_blank" class="down_chrome" title="点击下载Chrome">chrome
+					</a>
+                <a href="http://www.apple.com.cn/safari/" target="_blank" class="down_safari" title="点击下载Safari">safari
+					</a>
+                <a href="http://www.firefox.com.cn/download/" target="_blank" class="down_firefox" title="点击下载Firefox">firefox
+					</a>
+            </div>
+        </div>
+    </div>
+    <div class="pop_show_code" id="show_ani_code">
+        <a href="#" id="close_pop" title="关闭">X
+			</a>
+        <div>
+        </div>
+        <div class="inner">
+        </div>
+    </div>
+    <script type="text/javascript" src="animation/1459055662.js">
+    </script>
+    <script src="animation/1459055348.js">
+    </script>
+    <script src="animation/1459055379.js">
+    </script>
+    <script src="animation/1459055398.js">
+    </script>
+    <script src="animation/1459055413.js">
+    </script>
+    <script src="animation/1459055439.js">
+    </script>
+    <script src="animation/1459055503.js">
+    </script>
+    <script>
+        $(function(){
+            var array = [
+                {
+                    title:"clip-path 生成器",
+                    href:"clippy/index.html"
+                },
+                {
+                    title:"Vue-prop",
+                    href:"Vue-prop/index.html"
+                }
+            ];
+            for (var index = 0; index < array.length; index++) {
+                var element = array[index];
+                $('.mod_nav').append('<li title="'+element.title+'"><a href="'+element.href+'" target="_blank">'+element.title+'</a></li>');
+            }
+        })
+    </script>
+</body>
+</html>

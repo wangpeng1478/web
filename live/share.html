@@ -1,0 +1,137 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-12-22 16:29:15
+ * @LastEditTime: 2022-04-12 14:42:30
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: \工厂购e:\wangpeng1478.github.io\live\index.html
+-->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>分享屏幕</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="https://unpkg.com/vue@2.6.14"></script>
+    <style>
+        [v-cloak] {
+            opacity: 0 !important;
+        }
+        #app {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <p v-if="!inProgress">
+            <button @click="start" type="button">开始录制</button>
+        </p>
+        <p v-else>
+            <button @click="stop" type="button">停止录制</button>
+        </p>
+        <video ref="video" controls autoplay webkit-playsinline="true" playsinline="true" width="50%"></video>
+        <video ref="playbackVideo" controls autoplay webkit-playsinline="true" playsinline="true" width="50%"></video>
+    </div>
+
+
+
+    <script type="text/javascript">
+        new Vue({
+            el: '#app',
+            data: {
+                inProgress: false, //是否正在录制
+                mediaDevices: null, //MediaDevices对象
+                mediaRecorder: null, //录制器
+                mediaStreamTrack: null, //音频或视频流
+                blob: null, //录制的视频
+            },
+            mounted() {
+
+            },
+            methods: {
+                isObjEmpty(obj) {
+                    return (
+                        obj === undefined ||
+                        obj === "undefined" ||
+                        obj == null ||
+                        obj === "" ||
+                        obj.length === 0 ||
+                        (typeof obj === "object" && Object.keys(obj).length === 0)
+                    );
+                },
+                start() {
+                    const mediaOpts = {
+                        audio: true,
+                        video: {
+                            width: 1280, 
+                            height: 720,
+                            frameRate: { ideal: 100, max: 150 } //最佳帧率
+                        }
+                    }
+                    if (!this.isObjEmpty(typeof navigator.mediaDevices)) {
+                        navigator.mediaDevices.getDisplayMedia(mediaOpts).then(stream => {
+                            this.inProgress = true;
+                            this.mediaStreamTrack = stream;
+                            const video = this.$refs.video;
+                            if ("srcObject" in video) {
+                                video.srcObject = stream
+                            } else {
+                                video.src = window.URL && window.URL.createObjectURL(stream) || stream
+                            };
+                            video.play();
+                            this.mediaRecorder = new MediaRecorder(stream, {
+                                audioBitsPerSecond: 1280000, //音频码率
+                                videoBitsPerSecond: 8500000, //视频码率 (数值越大视频越清晰)
+                                mimeType: 'video/webm;codecs=h264' //视频编码格式
+                            });
+
+                            
+                            this.mediaRecorder.start();
+                            this.mediaRecorder.ondataavailable = e => {
+                                this.blob = new Blob([e.data], {
+                                    'type': 'video/mp4'
+                                });
+                            }
+                            this.mediaRecorder.onerror = e => {
+                                console.error(e)
+                            }
+                            this.mediaRecorder.onstart = e => {
+                                console.log('开始', e)
+                            }
+                            this.mediaRecorder.onstop = e => {
+                                console.log('结束', e);
+                                const url = window.URL && window.URL.createObjectURL(this.blob);
+                                this.$refs.playbackVideo.src = url;
+                            }
+                            console.log('this.mediaRecorder', this.mediaRecorder);
+                        }).catch(err => {
+                            console.log(err);
+                            alert('该浏览器不支持屏幕录制');
+                        })
+                    } else {
+                        alert('该浏览器不支持屏幕录制');
+                    }
+
+                },
+                stop() {
+                    this.inProgress = false;
+                    this.mediaStreamTrack.getVideoTracks().forEach(track => {
+                        track.stop();
+                    })
+                    this.mediaRecorder.stop();
+                },
+            }
+        });
+    </script>
+</body>
+
+</html>

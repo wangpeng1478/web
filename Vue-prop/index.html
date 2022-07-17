@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://cn.vuejs.org/images/icons/apple-icon-180x180.png">
+  <title>Vue-prop自动生成器</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.14.0/theme-chalk/index.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.3.2/styles/atom-one-dark.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <h2>Vue-prop自动生成器</h2>
+    <div>
+      <el-radio-group v-model="type" style="margin-bottom: 30px;" @change="handleTypeChange">
+        <el-radio-button label="view">视图</el-radio-button>
+        <el-radio-button label="code">代码</el-radio-button>
+      </el-radio-group>
+    </div>
+    <pre v-if="showCode">
+      <code class="js">{{textarea}}</code>
+    </pre>
+    <el-table
+      v-show="!showCode"
+      :data="tableData"
+      style="width: 100%"
+      empty-text="请添加"
+    >
+      <el-table-column
+        label="*参数"
+        width="180">
+        <template slot-scope="scope">
+          <el-input
+            v-if="scope.row.edit"
+            placeholder="请输入参数"
+            v-model.trim="scope.row.key"
+            clearable>
+          </el-input>
+          <span
+            v-else
+            style="margin-left: 10px"
+            @dblclick="handleDbclick(scope.row)"
+          >{{ scope.row.key }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="是否必填"
+        width="100px"
+      >
+        <template slot-scope="scope">
+          <el-checkbox v-model="scope.row.required">必填</el-checkbox>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="*类型">
+        <template slot-scope="scope">
+          <el-checkbox-group :min="1" v-model="scope.row.type" size="small">
+            <el-checkbox-button v-for="type in types" :label="type" :key="type">{{type}}</el-checkbox-button>
+          </el-checkbox-group>        
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="默认值"
+        style="max-width: 300px;"
+      >
+        <template slot-scope="scope">
+          <div class="flex-containter">
+            <el-checkbox v-model="scope.row.isDefault" @change="handleChangeDefault(scope.row)" style="margin-right: 5px;"></el-checkbox>
+            <el-input
+              v-if="scope.row.edit"
+              :ref="'uuid'+scope.row.uuid"
+              :disabled="!scope.row.isDefault"
+              placeholder="请输入默认值"
+              v-model="scope.row.defaultValue"
+              clearable
+            >
+            </el-input>
+            <span
+              v-else
+              style="margin-left: 10px"
+            >{{ scope.row.defaultValue }}</span>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column 
+        label="操作"
+        width="200px"
+      >
+        <template slot="header" slot-scope="scope">
+          <el-button type="primary" size="small" icon="el-icon-plus" @click="handleAdd">新增</el-button>
+        </template>
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          <el-button
+            size="mini"
+            v-if="!scope.row.edit"
+            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div v-show="!showCode">
+      <el-link href="https://cn.vuejs.org/v2/guide/components-props.html#Prop-%E9%AA%8C%E8%AF%81" type="primary" target="_blank" style="margin-top:20px">官网Prop验证</el-link>
+      <el-divider content-position="left">参考</el-divider>
+      <pre class="vue-class">
+        <code class="js">
+  Vue.component('my-component', {
+    props: {
+      // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
+      propA: Number,
+      // 多个可能的类型
+      propB: [String, Number],
+      // 必填的字符串
+      propC: {
+        type: String,
+        required: true
+      },
+      // 带有默认值的数字
+      propD: {
+        type: Number,
+        default: 100
+      },
+      // 带有默认值的对象
+      propE: {
+        type: Object,
+        // 对象或数组默认值必须从一个工厂函数获取
+        default: function () {
+          return { message: 'hello' }
+        }
+      },
+      // 自定义验证函数
+      propF: {
+        validator: function (value) {
+          // 这个值必须匹配下列字符串中的一个
+          return ['success', 'warning', 'danger'].indexOf(value) !== -1
+        }
+      }
+    }
+  })
+        </code
+      </pre>
+      <pre class="des-class">
+        <code class="js">
+    ## tips
+    1. 参数、类型必选，类型支持多个
+    2. 默认值只支持String、Number、Boolean类型，其他会有todo生成，请参考官方文档补充
+        </code>
+      </pre>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.14.0/index.min.js"></script>
+  <script src="index.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/mark.js/8.9.1/mark.min.js"></script>
+
+  <script>
+    Vue.directive('highlight',function (el) {
+      let blocks = el.querySelectorAll('pre code');
+      blocks.forEach((block)=>{
+        hljs.highlightBlock(block)    
+      })
+    })
+  var vm = new Vue({
+      el: "#app",
+      data: {
+        type: 'view',
+        types: TYPES,
+        textarea: '',
+        tableData: [{
+          uuid: geuuid(),
+          key: 'placeholder',
+          required: true,
+          type: ['String'],
+          isDefault: true,
+          defaultValue: '请输入'
+        }]
+      },
+      computed:{
+        showCode: function(){
+          return this.type === 'code'
+        }
+      },
+      mounted: function(){
+        const preEl = document.querySelectorAll('pre code')
+        preEl.forEach((el) => {
+          hljs.highlightBlock(el)
+        })
+      },
+      methods: {
+        handleEdit(index, row) {
+          this.$set(row, 'edit', true)
+        },
+        handleDelete(index, row) {
+          this.tableData.splice(index, 1)
+        },
+        handleAdd(){
+          this.tableData.push({
+            uuid: geuuid(),
+            key: '',
+            type: ['String'],
+            defaultValue: '',
+            required: false,
+            edit: true,
+            isDefault: false
+          })
+        },
+        // 切换显示code
+        handleTypeChange(){
+          if(this.showCode){
+            var json = getData(this.tableData)
+            this.textarea = json
+            this.$nextTick(()=>{
+              const preEl = document.querySelectorAll('pre code')
+              preEl.forEach((el) => {
+                hljs.highlightBlock(el)
+              })
+              new Mark("pre code").mark("todo")
+            })
+          }else{
+            this.tableData.forEach((item)=>{
+              this.$set(item, 'edit', false)
+            })
+          }
+        },
+        handleDbclick(row){
+          this.$set(row, 'edit', true)
+        },
+        handleChangeDefault(row){
+          let {isDefault, uuid} = row
+          this.$set(row, 'edit', true)
+          if(isDefault){
+            this.$nextTick(()=>{
+              this.$refs['uuid'+uuid].focus()
+            })
+          }else{
+            this.$set(row, 'defaultValue', '')
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

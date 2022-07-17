@@ -1,0 +1,94 @@
+<!--
+ * @Author: your name
+ * @Date: 2022-04-12 17:08:23
+ * @LastEditTime: 2022-04-12 17:33:05
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: \工厂购e:\wangpeng1478.github.io\s.html
+-->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>分享Private</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="https://unpkg.com/vue@2.6.14"></script>
+    <style>
+        [v-cloak] {
+            opacity: 0 !important;
+        }
+
+        #app {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <form action="" @submit.prevent="share" v-if="isShare">
+            <p>
+
+                <label>地址</label>
+                <input type="text" v-model="url" required>
+            </p>
+            <p>
+                <label>标题</label>
+                <input type="text" v-model="title" required>
+                <span style="font-size: 12px;color: red;">可能没有效果</span>
+            </p>
+            <p>
+                <label>内容</label>
+                <input type="text" v-model="text" required>
+            </p>
+            <p>
+                <label>文件</label>
+                <input type="file" @change="fileChange" multiple>
+            </p>
+            <p>
+                <button type="submit">分享</button>
+            </p>
+        </form>
+        <p v-else style="color: red;">暂不支持分享</p>
+
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#app',
+            data: {
+                isShare:typeof navigator.share === 'function',
+                url:window.location.href,
+                title:"标题",
+                text:"内容",
+                files:[]
+            },
+
+            methods: {
+                fileChange(e){
+                    this.files = e.target.files;
+                },
+                share() {
+                    navigator.share({
+                        url: this.url,
+                        title:this.title,
+                        text: this.text,
+                        files: this.files,
+                    }).then(res => {
+                        console.log(res)
+                    }).catch(err=>{
+                        alert(`[分享失败]${err}`)
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
