@@ -247,15 +247,15 @@
                         });
                         this.loading = true;
                         const deviceId = this.deviceId;
-                        //摄像头调用配置
+                        //摄像头调用配置 https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
                         let mediaOpts = {
                             audio: false,
                             video: true,
                             video: {
                                 deviceId,
-                                facingMode: "user",
-                                width:this.width,
-                                height:this.height,
+                                facingMode: "environment",
+                                // width:this.width,
+                                // height:this.height,
                                 frameRate: { ideal: 100, max: 150 } //最佳帧率
                             }
                         };
