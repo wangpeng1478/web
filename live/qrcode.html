@@ -20,8 +20,8 @@
             #app {
                 margin: 0;
                 padding: 0;
-                width: 100%;
-                height: 100%;
+                width: 100vw;
+                height: 100vh;
                 overflow: hidden;
             }
             *{
@@ -32,8 +32,8 @@
                 opacity: 0 !important;
             }
             video{
-                width: 100%;
-                height: 100%;
+                width: 100vw;
+                height: 100vh;
                 background: #000;
             }
             .Camera-toggle{
@@ -245,8 +245,8 @@
                             video: {
                                 deviceId,
                                 facingMode: "environment",
-                                width: this.width,
-                                height: this.height,
+                                width:this.width,
+                                height:this.height,
                                 frameRate: { ideal: 100, max: 150 } //最佳帧率
                             }
                         };
