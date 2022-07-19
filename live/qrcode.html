@@ -49,7 +49,7 @@
                 width: 40px;
                 height: 40px;
                 transform: translateX(-50%);
-                background-color: #0288d1;
+                background-color: #000000;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -64,76 +64,45 @@
             .Camera-overlay{
                 transition: all .3s ease-in-out;
                 position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%,-50%);
+                top: 0;
+                left: 0;
+                width:100%;
+                height: 100%;
                 background-color: transparent;
-                border-style: solid;
-                border-color: rgba(0,0,0,0.4);
-                border-width: 100vh;
-                pointer-events: none;
                 z-index: 5;
-                width: 60vw;
-                aspect-ratio: 1/1;
+                pointer-events: none;
                 overflow: hidden;
                 -webkit-user-select: none;
                 -moz-user-select: none;
                 -ms-user-select: none;
                 user-select: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
-            .Camera-overlay:before {
-                content: "";
-                top: 0;
-                left: 0;
-                position: absolute;
-                border-top: 2px solid hsla(0,0%,100%,.7);
-                border-left: 2px solid hsla(0,0%,100%,.7);
-                width: 10%;
-                height: 10%
-            }
-            .Camera-overlay:after {
-                content: "";
-                right: 0;
-                bottom: 0;
-                position: absolute;
-                border-bottom: 2px solid hsla(0,0%,100%,.7);
-                border-right: 2px solid hsla(0,0%,100%,.7);
-                width: 10%;
-                height: 10%
-            }
-            .scanningLine{
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                border-top: 2px solid #3fefef;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-                opacity:0.8;
-                /* animation: animate_line 3s linear infinite; */
+            .Camera-overlay>svg{
+                width: 5vw;
+                height: 5vw;
                 animation: animate_line 3s ease-in-out infinite;
-            };
-
+                opacity: 0.8;
+            }
             @-webkit-keyframes animate_line {
                 0%, 100% {
-                    transform: translateY(0);
+                    transform: scale(1);
                 }
-                50% {
-                    transform: translateY(calc(100% - 4px));
+                100% {
+                    transform: scale(0.95);
                 }
             }
 
             @keyframes animate_line {
                 0%, 100% {
-                    transform: translateY(0);
+                    transform: scale(1);
                 }
                 50% {
-                    transform: translateY(calc(100% - 4px));
+                    transform: scale(0.95);
                 }
-            }
+            };
             .resultShow .van-image{
                 display: block;
                 width: 50%;
@@ -162,7 +131,8 @@
             <video ref="video" autoplay webkit-playsinline="true" playsinline="true"></video>
             <transition name="van-fade">
                 <div v-if="!loading" ref="overlay" class="Camera-overlay">
-                    <div v-if="qRCodeIdentification" class="scanningLine"></div>
+                    <svg t="1658201742141" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5055" data-spm-anchor-id="a313x.7781069.0.i3" width="200" height="200"><path d="M194.56 364.544v-71.68c0-53.248 43.008-98.304 98.304-98.304h71.68c14.336 0 26.624-12.288 26.624-24.576-2.048-14.336-14.336-26.624-28.672-26.624h-71.68c-81.92 0-149.504 65.536-149.504 149.504v71.68c2.048 12.288 14.336 24.576 26.624 24.576 14.336 0 26.624-12.288 26.624-24.576zM659.456 194.56h71.68c53.248 0 98.304 43.008 98.304 98.304v71.68c0 14.336 12.288 24.576 26.624 24.576 14.336 0 26.624-12.288 26.624-24.576v-71.68c0-81.92-65.536-149.504-149.504-149.504h-71.68c-14.336 0-26.624 12.288-26.624 24.576 0 14.336 12.288 26.624 24.576 26.624zM829.44 661.504v71.68c0 53.248-43.008 98.304-98.304 98.304h-71.68c-14.336 0-26.624 12.288-26.624 26.624 0 14.336 12.288 26.624 26.624 26.624h71.68c81.92 0 149.504-65.536 149.504-149.504v-71.68c0-14.336-12.288-26.624-26.624-26.624-12.288-2.048-24.576 10.24-24.576 24.576zM362.496 829.44h-71.68c-53.248 0-98.304-43.008-98.304-98.304v-71.68c0-14.336-12.288-26.624-24.576-26.624-12.288 2.048-24.576 14.336-24.576 28.672v71.68c0 81.92 65.536 149.504 149.504 149.504h71.68c14.336 0 26.624-12.288 26.624-26.624-2.048-14.336-14.336-26.624-28.672-26.624z" fill="#ffffff" p-id="5056"></path></svg>
+                    <!-- <div v-if="qRCodeIdentification" class="scanningLine"></div> -->
                 </div>
             </transition>
             <!-- 切换摄像头 -->
@@ -285,10 +255,12 @@
                                 this.loading = false;
                                 this.startIdentify();
                                 this.$nextTick(_=>{
-                                    let overlay = this.$refs['overlay'];
-                                    overlay.style.borderWidth = `${this.height}px`;
-                                    overlay.style.width = `${this.width*0.6}px`;
-                                    overlay.style.height = `${this.width*0.6}px`;
+                                    let svg = document.querySelector("#app > div.Camera-overlay > svg");
+                                    let width = this.width;
+                                    let height = this.height;
+                                    let minLength = width>height?height:width;
+                                    svg.style.width = `${minLength*0.75}px`;
+                                    svg.style.height = `${minLength*0.75}px`;
                                 })
                             });
                             video.addEventListener('pause', () => {
