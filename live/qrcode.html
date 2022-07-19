@@ -69,7 +69,7 @@
                 transform: translate(-50%,-50%);
                 background-color: transparent;
                 border-style: solid;
-                border-color: rgba(0,0,0,0.8);
+                border-color: rgba(0,0,0,0.4);
                 border-width: 100vh;
                 pointer-events: none;
                 z-index: 5;
@@ -315,8 +315,8 @@
                         navigator.mediaDevices.enumerateDevices().then(devicesList => {
                             const arr = [];
                             devicesList.forEach(e => {
-                                if (e.deviceId) {
-                                    e.text = e.label || e.deviceId;
+                                e.text = e.label || e.deviceId;
+                                if (e.deviceId && !e.text.includes('麦克风')) {
                                     arr.push(e)
                                 }
                             });
