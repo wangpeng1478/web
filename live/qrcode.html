@@ -10,7 +10,7 @@
         <link href="https://cdn.bootcdn.net/ajax/libs/vant/2.12.25/index.min.css" rel="stylesheet">
         <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
         <script src="https://cdn.bootcdn.net/ajax/libs/vant/2.12.25/vant.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/cozmo/jsQR@master/dist/jsQR.js"></script>
+        <script src="jsQR.js"></script>
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <style>
@@ -349,7 +349,6 @@
                                 const canvas = document.createElement("canvas");
                                 const width = video.videoWidth;
                                 const height = video.videoHeight;
-
                                 canvas.width = width;
                                 canvas.height = height;
                                 const ctx = canvas.getContext('2d');
@@ -419,6 +418,28 @@
                             images: [url],
                             closeable: true,
                         });
+                    },
+                    //判断重复次数
+                    countRepeat(array=[]){
+                        let resultArr = [];
+                        console.time('countRepeat');
+                        for (let index = 0; index < array.length; index++) {
+                            if(index%4 === 0){
+                                const value = `rgba(${array[index]},${array[index+1]},${array[index+2]},${array[index+3]})`;
+                                const repeatIndex = resultArr.findIndex(e=>e.value===value)||-1;
+                                if(repeatIndex === -1){
+                                    resultArr.push({
+                                        value:value,
+                                        count:1
+                                    });
+                                }else{
+                                    resultArr[repeatIndex].count++;
+                                }
+                            }
+                        }
+                        console.timeEnd('countRepeat');
+                        console.log(resultArr);
+                        return resultArr
                     },
                 }
             });

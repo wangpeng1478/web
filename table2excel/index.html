@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+    <head>
+        <meta charset="utf-8">
+        <title>table2excel</title>
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <link rel="shortcut icon" href="" type="image/x-icon" />
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <style>
+            body {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            table {
+                width: 100%;
+                margin: 1em 0;
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid grey;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: center;
+            }
+
+            table thead tr {
+                background-color: #000;
+                color: #fff;
+            }
+
+            table tbody tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            table tbody tr:nth-child(even) {
+                background-color: #f1f1f1;
+            }
+        </style>
+    </head>
+
+    <body>
+        <table id="exportExcelTable">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+        <button type="button" onClick="exportExcel()">导出</button>
+        <script src="index.js"></script>
+        <script type="text/javascript">
+            const column = [
+                {
+                    title: 'Name',
+                    key: 'name',
+                    type: 'text'
+                },
+                {
+                    title: 'Age',
+                    key: 'age',
+                    type: 'text'
+                },
+                {
+                    title: 'Pic',
+                    key: 'pic',
+                    type: 'image',
+                    width: 80,
+                    height: 80
+                }
+            ];
+            const tableData = [
+                {
+                    name: 'xiao',
+                    age: '17',
+                    pic: location.origin+'/1.jpg'
+                },
+                {
+                    name: 'jie',
+                    age: '18',
+                    pic: location.origin+'/2.jpg'
+                }
+            ];
+            document.addEventListener('DOMContentLoaded', function() {
+                let theadHtml = ``;
+                column.forEach(element => {
+                    theadHtml += `<th>${element.title}</th>`;
+                });
+                document.querySelector('#exportExcelTable thead').innerHTML = `<tr>${theadHtml}</tr>`;
+                let tbodyHtml = ``;
+                tableData.forEach(element => {
+                    const {width,height} = column.find(e=>e.key=="pic");
+                    tbodyHtml += `<tr>
+                                    <td>${element.name}</td>
+                                    <td>${element.age}</td>
+                                    <td><img width="${width}" height="${height}" src="${element.pic}"></td>
+                                  </tr>`;
+                });
+                document.querySelector('#exportExcelTable tbody').innerHTML = tbodyHtml;
+            });
+            function exportExcel() {
+                table2excel(column, tableData, `1`)
+            }
+        </script>
+    </body>
+</html>
