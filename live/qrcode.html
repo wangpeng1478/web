@@ -279,6 +279,7 @@
                                 video.src = window.URL && window.URL.createObjectURL(stream) || stream
                             }
                             video.play();
+                            this.devicesInit();
                             video.addEventListener('play', () => {
                                 toast.clear();
                                 this.loading = false;
@@ -314,7 +315,7 @@
                         navigator.mediaDevices.enumerateDevices().then(devicesList => {
                             const arr = [];
                             devicesList.forEach(e => {
-                                if (e.deviceId && e.kind === 'videoinput') {
+                                if (e.deviceId) {
                                     e.text = e.label || e.deviceId;
                                     arr.push(e)
                                 }
