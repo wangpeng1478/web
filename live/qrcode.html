@@ -103,7 +103,12 @@
                 50% {
                     transform: scale(0.8);
                 }
-            };
+            }
+            .resultShow .van-image{
+                display: block;
+                width: 50%;
+                margin: 20px auto 10px auto;
+            }
             .resultShow .textarea{
                 display: flex;
                 justify-content: center;
@@ -147,7 +152,7 @@
 
             <!-- 结果 -->
             <van-dialog class="resultShow"  v-model="resultShow" title="识别结果" theme="round-button" confirm-button-text="重新扫描" @confirm="startIdentify">
-                <van-image @click="ImagePreview(result.url)" :src="result.url" style=" display: block;width: 50%;margin: 20px auto 10px auto;"></van-image>
+                <van-image @click="ImagePreview(result.url)" :src="result.url"></van-image>
                 <div class="textarea">
                     <textarea readonly>{{result.data}}</textarea>
                 </div>
