@@ -45,21 +45,21 @@
             .Camera-toggle{
                 position: fixed;
                 left: 50%;
-                bottom: 2em;
-                width: 40px;
-                height: 40px;
+                bottom: 5vh;
+                width: 15vw;
+                height: 15vw;
                 transform: translateX(-50%);
                 background-color: #000000;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border-radius: 100px;
+                border-radius: 20vw;
                 -webkit-tap-highlight-color: transparent;
                 z-index: 10;
                 opacity: 0.8;
             }
             .Camera-toggle>svg{
-                width: 20px;
+                width: 7vw;
             }
             .Camera-overlay{
                 transition: all .3s ease-in-out;
@@ -85,13 +85,14 @@
                 height: 5vw;
                 animation: animate_line 3s ease-in-out infinite;
                 opacity: 0.8;
+                filter: drop-shadow(0 0 10px rgba(0,0,0,0.4));
             }
             @-webkit-keyframes animate_line {
                 0%, 100% {
                     transform: scale(1);
                 }
                 100% {
-                    transform: scale(0.95);
+                    transform: scale(0.8);
                 }
             }
 
@@ -100,14 +101,9 @@
                     transform: scale(1);
                 }
                 50% {
-                    transform: scale(0.95);
+                    transform: scale(0.8);
                 }
             };
-            .resultShow .van-image{
-                display: block;
-                width: 50%;
-                margin: 20px auto 0 auto;
-            }
             .resultShow .textarea{
                 display: flex;
                 justify-content: center;
@@ -130,9 +126,8 @@
         <div id="app" v-cloak>
             <video ref="video" autoplay webkit-playsinline="true" playsinline="true"></video>
             <transition name="van-fade">
-                <div v-if="!loading" ref="overlay" class="Camera-overlay">
-                    <svg t="1658201742141" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5055" data-spm-anchor-id="a313x.7781069.0.i3" width="200" height="200"><path d="M194.56 364.544v-71.68c0-53.248 43.008-98.304 98.304-98.304h71.68c14.336 0 26.624-12.288 26.624-24.576-2.048-14.336-14.336-26.624-28.672-26.624h-71.68c-81.92 0-149.504 65.536-149.504 149.504v71.68c2.048 12.288 14.336 24.576 26.624 24.576 14.336 0 26.624-12.288 26.624-24.576zM659.456 194.56h71.68c53.248 0 98.304 43.008 98.304 98.304v71.68c0 14.336 12.288 24.576 26.624 24.576 14.336 0 26.624-12.288 26.624-24.576v-71.68c0-81.92-65.536-149.504-149.504-149.504h-71.68c-14.336 0-26.624 12.288-26.624 24.576 0 14.336 12.288 26.624 24.576 26.624zM829.44 661.504v71.68c0 53.248-43.008 98.304-98.304 98.304h-71.68c-14.336 0-26.624 12.288-26.624 26.624 0 14.336 12.288 26.624 26.624 26.624h71.68c81.92 0 149.504-65.536 149.504-149.504v-71.68c0-14.336-12.288-26.624-26.624-26.624-12.288-2.048-24.576 10.24-24.576 24.576zM362.496 829.44h-71.68c-53.248 0-98.304-43.008-98.304-98.304v-71.68c0-14.336-12.288-26.624-24.576-26.624-12.288 2.048-24.576 14.336-24.576 28.672v71.68c0 81.92 65.536 149.504 149.504 149.504h71.68c14.336 0 26.624-12.288 26.624-26.624-2.048-14.336-14.336-26.624-28.672-26.624z" fill="#ffffff" p-id="5056"></path></svg>
-                    <!-- <div v-if="qRCodeIdentification" class="scanningLine"></div> -->
+                <div v-if="!loading" ref="overlay" class="Camera-overlay" :class="{'CameraAnimation':qRCodeIdentification}">
+                    <svg t="1658220649989" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6994" width="200" height="200"><path d="M113.1008 356.5312a12.8 12.8 0 0 1-12.8-12.8V175.104A74.9056 74.9056 0 0 1 175.104 100.3008h168.6272a12.8 12.8 0 0 1 0 25.6H175.104c-27.136 0-49.2032 22.0672-49.2032 49.2032v168.6272a12.8 12.8 0 0 1-12.8 12.8zM910.8992 356.5312a12.8 12.8 0 0 1-12.8-12.8V175.104c0-27.136-22.0672-49.2032-49.2032-49.2032h-168.6272a12.8 12.8 0 0 1 0-25.6h168.6272a74.9056 74.9056 0 0 1 74.8032 74.8032v168.6272a12.8 12.8 0 0 1-12.8 12.8zM848.896 923.6992h-168.6272a12.8 12.8 0 0 1 0-25.6h168.6272c27.136 0 49.2032-22.144 49.2032-49.408v-168.6272a12.8 12.8 0 0 1 25.6 0v168.6272a75.008 75.008 0 0 1-74.8032 75.008zM343.7312 923.6992H175.104a75.008 75.008 0 0 1-74.8032-75.008v-168.6272a12.8 12.8 0 0 1 25.6 0v168.6272c0 27.2384 22.0672 49.408 49.2032 49.408h168.6272a12.8 12.8 0 0 1 0 25.6z" fill="#ffffff" p-id="6995"></path></svg>
                 </div>
             </transition>
             <!-- 切换摄像头 -->
@@ -152,7 +147,7 @@
 
             <!-- 结果 -->
             <van-dialog class="resultShow"  v-model="resultShow" title="识别结果" theme="round-button" confirm-button-text="重新扫描" @confirm="startIdentify">
-                <van-image @click="ImagePreview(result.url)" :src="result.url"></van-image>
+                <van-image @click="ImagePreview(result.url)" :src="result.url" style=" display: block;width: 50%;margin: 20px auto 10px auto;"></van-image>
                 <div class="textarea">
                     <textarea readonly>{{result.data}}</textarea>
                 </div>
