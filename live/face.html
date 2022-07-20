@@ -221,7 +221,6 @@
 
                         tracker.on('track', function(event) {
                             context.clearRect(0, 0, canvas.width, canvas.height);
-
                             event.data.forEach(function(rect) {
                             context.strokeStyle = '#a64ceb';
                             context.strokeRect(rect.x, rect.y, rect.width, rect.height);
