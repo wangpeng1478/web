@@ -4,10 +4,8 @@
     <head>
         <meta charset="utf-8">
         <title>二维码识别</title>
-        <meta name="viewport"
-            content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-        <link rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
         <meta name="format-detection" content="telephone=no">
         <link href="https://cdn.bootcdn.net/ajax/libs/vant/2.12.25/index.min.css" rel="stylesheet">
         <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
@@ -223,6 +221,7 @@
                     this.compatible();
                     this.openMedia();
                     this.devicesInit();
+                    this.initGUI();
                 },
                 methods: {
                     isObjEmpty(obj) {
@@ -235,10 +234,10 @@
                             (typeof obj === "object" && Object.keys(obj).length === 0)
                         );
                     },
+                    //查看性能统计
                     initStats() {
                         const stats = new Stats();
                         window['discernCount'] = stats.addPanel( new Stats.Panel( 'count', '#ff8', '#221' ) );
-                        console.log(stats);
                         stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
                         stats.domElement.style.position = 'absolute';
                         stats.domElement.style.left = '0px';

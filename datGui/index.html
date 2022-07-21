@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+    <head>
+        <meta charset="utf-8">
+        <title>性能监测&图形控制界面</title>
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <link rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
+        <meta name="format-detection" content="telephone=no">
+        <script src="https://cdn.bootcdn.net/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+        <script src="https://mrdoob.github.io/stats.js/build/stats.min.js"></script>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <style>
+            html,
+            body,
+            #container,
+            #app {
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script>
+            document.addEventListener('DOMContentLoaded', _ => {
+                //性能监测
+                const stats = new Stats();
+                // window['discernCount'] = stats.addPanel( new Stats.Panel( 'count', '#ff8', '#221' ) );
+                // window['discernCount'].update(this.count);
+                stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
+                stats.domElement.style = `
+                    position: fixed;
+                    top:50%;
+                    left:0;
+                    cursor: pointer;
+                    opacity: 0.9;
+                    z-index: 20;
+                    transform: translateY(-50%);
+                `;
+                document.body.appendChild(stats.dom);
+                requestAnimationFrame(function loop() {
+                    stats.update();
+                    requestAnimationFrame(loop)
+                });
+
+                //图形控制界面
+                const gui = new dat.GUI();
+                gui.close();
+                console.log(`[gui]`, gui);
+                const controls = new function () {
+                    this.range = 60; //范围
+                    this.checkbox = false; //开关
+                    this.select = 2; //下拉框
+
+                    this.color0 = "#ffae23"; // CSS string
+                    this.color1 = [0, 128, 255]; // RGB array
+                    this.color2 = [0, 128, 255, 0.3]; // RGB with alpha
+                    this.color3 = { h: 350, s: 0.9, v: 0.3 }; // Hue, saturation, value
+
+                    this.input = 'String'; //字符串
+                    this.text = () => {
+                        this.range--;
+                        this.checkbox = !this.checkbox;
+                        gui.updateDisplay();
+                        console.log(`[点击]`, this);
+                    }; //文本
+                    console.log(`[controls]`, this);
+                };
+                const formFolder = gui.addFolder(`表单`);
+                formFolder.add(controls, 'range', 0, 100).name(`范围`).step(1).onChange((value) => {
+                    console.log(`[范围]`, value);
+                });
+                formFolder.add(controls, 'checkbox').name(`开关`).onChange((value) => {
+                    console.log(`[开关]`, value);
+                });
+                formFolder.add(controls, 'select', {
+                    '一': 1,
+                    '二': 2,
+                    '三': 3,
+                }).name(`下拉框`).onChange((value) => {
+                    console.log(`[下拉框]`, value);
+                });
+                formFolder.add(controls, 'input').name(`输入框`).onChange((value) => {
+                    console.log(`[输入框]`, value);
+                });
+                const colorFolder = gui.addFolder(`颜色`);
+                colorFolder.addColor(controls, 'color0').name(`颜色0`).onChange((value) => {
+                    console.log(`[color0-onChange]`, value);
+                }).onFinishChange((value) => {
+                    console.log(`[color0-onFinishChange]`, value);
+                });
+                colorFolder.addColor(controls, 'color1').name(`颜色1`).onChange((value) => {
+                    console.log(`[color1-onChange]`, value);
+                }).onFinishChange((value) => {
+                    console.log(`[color1-onFinishChange]`, value);
+                });
+                colorFolder.addColor(controls, 'color2').name(`颜色2`).onChange((value) => {
+                    console.log(`[color2-onChange]`, value);
+                }).onFinishChange((value) => {
+                    console.log(`[color2-onFinishChange]`, value);
+                });
+                colorFolder.addColor(controls, 'color3').name(`颜色3`).onChange((value) => {
+                    console.log(`[color3-onChange]`, value);
+                }).onFinishChange((value) => {
+                    console.log(`[color3-onFinishChange]`, value);
+                });
+
+                const funFolder = gui.addFolder(`方法`);
+                funFolder.add(controls, 'text').name(`点击`);
+
+                //打开文件夹
+                formFolder.open();
+                colorFolder.open();
+                funFolder.open();
+            });
+        </script>
+    </body>
+
+</html>
